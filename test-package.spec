@@ -1,5 +1,5 @@
 Name: pulp-test-package
-Version: 0.6.1	
+Version: 0.7.1	
 Release: 1%{?dist}
 Summary: Test package	
 
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr 25 2012 Unknown name 0.7.1-1
+- fake entry
+
 * Tue Jul 13 2010 Mike McCune 0.6.1-1
 - forcing noarch (mmccune@redhat.com)
 * Wed May 05 2010 Mike McCune <mmccune@redhat.com> 0.3.1-1
