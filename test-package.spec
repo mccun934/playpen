@@ -1,5 +1,5 @@
 Name: pulp-test-package
-Version: 0.7.1	
+Version: 0.8.1	
 Release: 1%{?dist}
 Summary: Test package	
 
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr 25 2012 Unknown name 0.8.1-1
+- tag again
+
 * Wed Apr 25 2012 Unknown name 0.7.1-1
 - fake entry
 
