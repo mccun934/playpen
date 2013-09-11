@@ -1,0 +1,3 @@
+#!/bin/bash
+
+brew latest-pkg satellite-6.0-rhel-6-candidate $1
