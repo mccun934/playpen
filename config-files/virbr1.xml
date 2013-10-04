@@ -1,0 +1,8 @@
+<interface type='bridge' name='virbr1'>
+  <start mode='none'/>
+  <protocol family='ipv4'>
+    <ip address='192.168.100.1' prefix='24'/>
+  </protocol>
+  <bridge stp='on' delay='0'>
+  </bridge>
+</interface>
