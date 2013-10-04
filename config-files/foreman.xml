@@ -1,0 +1,9 @@
+<network>
+  <name>foreman</name>
+  <uuid>1ae13060-794a-e421-9080-c0edc3c7c908</uuid>
+  <forward mode='nat'/>
+  <bridge name='virbr1' stp='off' delay='0' />
+  <mac address='52:54:00:D3:EF:CB'/>
+  <ip address='192.168.100.1' netmask='255.255.255.0'>
+  </ip>
+</network>
