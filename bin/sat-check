@@ -19,10 +19,10 @@ def check_rpm_list(rpm_array, search_strings):
 
 
 def check_registration():
-  output = "subscription-manager identity"
+  output = commands.getstatusoutput("subscription-manager identity")
   retcode = output[0]
   if retcode != 0:
-    print "CONFLICT DETECTED: Your system is not registered via subscription-manager"
+    print "WARNING: Your system is not registered via subscription-manager"
     print "and may not have access to required packages to complete installation."
     print "Recommend using the 'subscription-manager' command to properly register your system"
   else:
@@ -39,21 +39,35 @@ def check_puppet():
 
 
 def check_repos():
-  print "Check repos"
   output = commands.getstatusoutput("yum -v repolist enabled | grep \"Repo-id\"")
   repo_ids = output[1]
   # Check for rhel6-server
   if not "rhel-6-server-rpms" in repo_ids:
     print "WARNING: rhel-6-server-rpms is not an enabled yum repository.  Your system needs"
-    print "access to Red Hat Enterprise Linux 6 RPMs.  Proceed with caution"
-
+    print "access to Red Hat Enterprise Linux 6 RPMs.  If your system has access to this software"
+    print "via other means you can ignore this."
   if not "rhel-server-6-satellite-6-mdp-2-rpms" in repo_ids:
     print "WARNING: rhel-server-6-satellite-6-mdp-2-rpms is not an enabled yum repository.  Your"
-    print "system needs access  
+    print "system needs access to the MDP2 repository.  If you are installing via ISO you can ignore this."
+  else:
+    print "OK: Your system has the correct yum repository configuration"
 
-  rhel-server-6-satellite-6-mdp-2-rpms
-  for id in repo_ids:
-    if id.find('rhel-6-server-rpms') >= 0 
+def check_network(): 
+  output = commands.getstatusoutput("curl -X GET http://www.redhat.com/")
+  retcode = output[0]
+  if retcode != 0:
+    print "WARNING: Your system does not have access to http://www.redhat.com.  You"
+    print "may be disconnected from the internet or require an HTTP proxy to access"
+    print "the outside network. If you are using a HTTP PROXY please take note of"
+    print "proxy options during katello-configure:"
+    print ""
+    print "    --proxy-url=PROXY_URL"
+    print "    --proxy-port=PROXY_PORT"
+    print "    --proxy-user=PROXY_USER"
+    print "    --proxy-pass=PROXY_PASS"
+  else:
+    print "OK: Unrestricted access to redhat.com allowed."
+  
 
 
 print "\n1) Checking installed packages for possible conflicts\n"
@@ -62,4 +76,6 @@ print "\n2) Checking system registration via subscription-manager\n"
 check_registration()
 print "\n3) Checking configured yum repositories\n"
 check_repos()
+print "\n4) Checking access to redhat.com\n"
+check_network()
 
