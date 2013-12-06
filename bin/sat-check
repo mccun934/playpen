@@ -14,8 +14,10 @@ def check_rpm_list(rpm_array, search_strings):
 
   if conflict_count > 0:
     print "\nCONFLICT DETECTED: Found [%s] conflicting packages, recommend removal." % conflict_count
+    return 1
   else:
     print "OK: No conflicting packages detected"
+    return 0
 
 
 def check_registration():
@@ -25,17 +27,16 @@ def check_registration():
     print "WARNING: Your system is not registered via subscription-manager"
     print "and may not have access to required packages to complete installation."
     print "Recommend using the 'subscription-manager' command to properly register your system"
+    return 1
   else:
     print "OK: Registered via subscription-manager"
+    return 0
 
 
 def check_packages():
   output = commands.getstatusoutput('rpm -qa')
   javarpms = output[1].strip().split('\n')
-  check_rpm_list(javarpms, ['oracle', 'sun', 'ibm', 'puppet', 'katello', 'pulp'])
-
-def check_puppet():
-  print "Check puppet"
+  return check_rpm_list(javarpms, ['oracle', 'sun', 'ibm', 'puppet', 'katello', 'pulp'])
 
 
 def check_repos():
@@ -49,8 +50,10 @@ def check_repos():
   if not "rhel-server-6-satellite-6-mdp-2-rpms" in repo_ids:
     print "WARNING: rhel-server-6-satellite-6-mdp-2-rpms is not an enabled yum repository.  Your"
     print "system needs access to the MDP2 repository.  If you are installing via ISO you can ignore this."
+    return 1
   else:
     print "OK: Your system has the correct yum repository configuration"
+    return 0
 
 def check_network(): 
   output = commands.getstatusoutput("curl -X GET http://www.redhat.com/")
@@ -65,17 +68,20 @@ def check_network():
     print "    --proxy-port=PROXY_PORT"
     print "    --proxy-user=PROXY_USER"
     print "    --proxy-pass=PROXY_PASS"
+    return 1
   else:
     print "OK: Unrestricted access to redhat.com allowed."
+    return 0
   
 
-
+retval = 0
 print "\n1) Checking installed packages for possible conflicts\n"
-check_packages()
+retval += check_packages()
 print "\n2) Checking system registration via subscription-manager\n"
-check_registration()
+retval += check_registration()
 print "\n3) Checking configured yum repositories\n"
-check_repos()
+retval += check_repos()
 print "\n4) Checking access to redhat.com\n"
-check_network()
-
+retval += check_network()
+print "\nDONE, please see above warnings and indications."
+exit(retval)
