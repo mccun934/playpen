@@ -1,0 +1,61 @@
+#!/bin/bash
+# Echo all commands
+# set -x
+
+# Stop all services
+
+# katello-service stop
+service mongod start
+
+# Backup dir
+
+umask 0027
+export BDIR=/var/tmp/katello-backup-`date "+%Y%m%d%H%M"`
+mkdir $BDIR
+chgrp postgres $BDIR
+chmod 770 $BDIR
+cd $BDIR
+
+
+# Conf files
+
+tar --selinux -czf config_files.tar.gz \
+/etc/foreman \
+/etc/foreman-proxy \
+/etc/katello \
+/etc/katello-installer \
+/etc/hammer \
+/etc/elasticsearch \
+/etc/candlepin \
+/etc/puppet \
+/etc/pulp \
+/etc/gofer \
+/etc/httpd \
+/etc/pki/katello \
+/etc/pki/pulp \
+/etc/qpidd.conf \
+/etc/redhat_access \
+/etc/qpid \
+/etc/sysconfig/pgsql \
+/etc/sysconfig/katello \
+/etc/sysconfig/elasticsearch \
+/root/ssl-build \
+/var/www/html/pub   
+
+# tar --selinux -czvf mongo_data.tar.gz /var/lib/mongodb
+# tar --selinux -czvf pgsql_data.tar.gz /var/lib/pgsql/data/
+
+runuser - postgres -c "pg_dump -Fc foreman > $BDIR/foreman.dump"
+runuser - postgres -c "pg_dump -Fc candlepin > $BDIR/candlepin.dump"
+
+mongodump --host localhost --out $BDIR/mongo_dump
+ 
+# https://pulp-user-guide.readthedocs.org/en/latest/server.html#backups
+# Pulp backup
+
+
+echo ""
+echo ""
+echo "** BACKUP Complete, contents can be found in: $BDIR"
+echo ""
+echo "" 
