@@ -1,0 +1,8 @@
+#!/bin/bash
+
+listrepo $1 > /tmp/one-diffrepo.out
+listrepo $2 > /tmp/two-diffrepo.out
+
+diff -uw /tmp/one-diffrepo.out /tmp/two-diffrepo.out
+
+rm /tmp/one-diffrepo.out /tmp/two-diffrepo.out

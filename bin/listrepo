@@ -1,0 +1,17 @@
+#!/bin/bash
+
+PMARY=`curl -s "$1/repodata/repomd.xml" | xmllint --format - | grep primary.xml.gz | awk -F= '{print $2}' | sed 's/"//g' | sed 's/\/>//g'`
+
+TEMP_PRIMARY=/tmp/99-primary.xml.gz
+
+
+curl -s --output $TEMP_PRIMARY $1/$PMARY
+ 
+gunzip -f $TEMP_PRIMARY
+
+# grep location /tmp/99-primary.xml | awk -F=href '{print $2}' | sed 's/"//g' | sed 's/\/>//g' | sort
+grep location /tmp/99-primary.xml | awk -F href=\" '{print $2}' | sed 's/"//g' | sed 's/\/>//g' | sed 's/Packages\///g'| sort
+
+
+# rm /tmp/99-primary.xml
+
