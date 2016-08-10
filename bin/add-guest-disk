@@ -1,0 +1,28 @@
+#!/bin/bash
+
+usage(){
+  echo "Usage: GUEST_NAME VOL_SIZE(GB)"
+}
+
+GUEST_NAME=$1
+VOL_SIZE=$2
+
+
+if [[ -z "$GUEST_NAME" ]]
+then
+  usage
+  exit 1
+fi
+
+if [[ -z "$VOL_SIZE" ]]
+then
+  usage
+  exit 1
+fi
+
+sudo dd if=/dev/zero of=/var/lib/libvirt/images/$GUEST_NAME-disk2.img bs=1 count=1 seek=`echo $VOL_SIZE`485750000
+
+sudo virsh attach-disk $GUEST_NAME --source /var/lib/libvirt/images/$GUEST_NAME-disk2.img  --target vdb --cache none
+
+echo "Reboot your guest to see the new disk"
+
