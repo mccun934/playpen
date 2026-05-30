@@ -3,465 +3,102 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mike McCune — Engineering Leader</title>
-<meta name="description" content="Mike McCune, engineering leader in Portland, OR. Two decades scaling product engineering — Red Hat, Logixboard, now Coalesce. Less, but better." />
-<meta name="author" content="Mike McCune" />
-
-<!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Mike McCune — Engineering Leader" />
-<meta property="og:description" content="Two decades scaling product engineering. I build the system around the team, then get out of its way." />
-<meta property="og:url" content="https://mccune.io" />
-
-<!-- Favicon: the Braun power dot. Nothing more is needed. -->
+<title>mccune.io — index</title>
+<meta name="description" content="Index of pages by Mike McCune." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23eceae3'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23e2552a'/%3E%3C/svg%3E" />
-
 <style>
-  /*
-    mccune.io — designed in the spirit of Dieter Rams.
-    No frameworks, no web fonts, no build step. One file.
-    As little design as possible — less, but better.
-  */
-
   :root{
-    --paper:   #eceae3;   /* warm Braun off-white            */
-    --surface: #f6f5f1;   /* panel white                     */
-    --ink:     #1b1b18;   /* near-black, the only "loud" tone */
-    --muted:   #76746c;   /* functional grey                 */
-    --faint:   #9b988f;   /* captions                        */
-    --line:    #d4d1c8;   /* hairlines                       */
-    --accent:  #e2552a;   /* the power dot                   */
-
-    --max: 1120px;
-    --gut: clamp(20px, 5vw, 64px);
-    --sans: "Helvetica Neue", Helvetica, Arial, "Inter", system-ui, sans-serif;
-    --mono: "SFMono-Regular", ui-monospace, "Roboto Mono", Menlo, Consolas, monospace;
+    --paper:#eceae3; --ink:#1b1b18; --muted:#76746c; --faint:#9b988f;
+    --line:#d4d1c8; --accent:#e2552a;
+    --sans:"Helvetica Neue",Helvetica,Arial,"Inter",system-ui,sans-serif;
+    --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
   }
-
-  *{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  *{box-sizing:border-box;}
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--sans);
-    font-size:17px;
-    line-height:1.55;
-    font-weight:400;
-    letter-spacing:0.005em;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
+    margin:0; min-height:100vh; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
   }
-  ::selection{ background:var(--accent); color:#fff; }
+  ::selection{background:var(--accent);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{ width:100%; max-width:720px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  .label{ font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); }
 
-  a{ color:inherit; text-decoration:none; }
-  h1,h2,h3{ font-weight:600; letter-spacing:-0.02em; margin:0; }
+  header{ padding:clamp(48px,10vw,96px) 0 clamp(28px,5vw,44px); }
+  .brand{ display:flex; align-items:center; gap:12px; margin-bottom:26px; }
+  .mark{ width:28px; height:28px; border:1.5px solid var(--ink); border-radius:50%;
+         display:grid; place-items:center; font-size:11px; font-weight:700; letter-spacing:0.04em; }
+  h1{ font-size:clamp(26px,4.6vw,40px); font-weight:600; letter-spacing:-0.02em; margin:0 0 12px; }
+  .intro{ color:var(--muted); max-width:46ch; margin:0; }
 
-  /* ---- shared label: the Braun control caption -------------------- */
-  .label{
-    font-size:11px; font-weight:600;
-    letter-spacing:0.18em; text-transform:uppercase;
-    color:var(--muted);
+  main{ flex:1; }
+  .list{ border-top:1px solid var(--ink); }
+  .row{
+    display:grid; grid-template-columns:46px 1fr auto; align-items:baseline;
+    gap:4px 22px; padding:26px 4px; border-bottom:1px solid var(--line);
+    transition:padding-left .16s, background .16s;
   }
-  .idx{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
-
-  .wrap{
-    max-width:var(--max);
-    margin:0 auto;
-    padding:0 var(--gut);
-  }
-
-  /* ====== MASTHEAD ================================================== */
-  .mast{
-    position:sticky; top:0; z-index:20;
-    background:color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter:saturate(1.1) blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .mast .wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height:62px;
-  }
-  .brand{ display:flex; align-items:center; gap:12px; font-weight:600; letter-spacing:-0.01em; }
-  .mark{
-    width:26px; height:26px; flex:none;
-    border:1.5px solid var(--ink); border-radius:50%;
-    display:grid; place-items:center;
-    font-size:11px; font-weight:700; letter-spacing:0.04em;
-  }
-  .nav{ display:flex; align-items:center; gap:clamp(14px,3vw,30px); }
-  .nav a{ font-size:14px; color:var(--muted); transition:color .15s; }
-  .nav a:hover{ color:var(--ink); }
-  .nav .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block; vertical-align:middle; margin-right:7px; }
-  .nav .now{ color:var(--ink); font-size:13px; }
-  @media (max-width:560px){ .nav .work-link,.nav .about-link{ display:none; } }
-
-  /* ====== HERO ===================================================== */
-  .hero{ padding:clamp(56px,11vw,120px) 0 clamp(40px,7vw,72px); }
-  .hero .kicker{ display:flex; gap:14px; align-items:center; margin-bottom:30px; }
-  .hero h1{
-    font-size:clamp(34px,6.4vw,72px);
-    line-height:1.04;
-    max-width:16ch;
-    margin:0 0 30px;
-  }
-  .hero h1 em{ font-style:normal; color:var(--accent); }
-  .lede{
-    font-size:clamp(17px,2.1vw,21px);
-    line-height:1.5;
-    color:var(--ink);
-    max-width:54ch;
-    margin:0 0 38px;
-  }
-  .lede b{ font-weight:600; }
-  .cta{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
-  .btn{
-    display:inline-flex; align-items:center; gap:9px;
-    font-size:14px; font-weight:600; letter-spacing:0.01em;
-    padding:13px 22px; border-radius:2px;
-    border:1px solid var(--ink);
-    transition:background .15s, color .15s, border-color .15s;
-  }
-  .btn-solid{ background:var(--ink); color:var(--paper); }
-  .btn-solid:hover{ background:var(--accent); border-color:var(--accent); }
-  .btn-ghost{ color:var(--ink); }
-  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
-  .btn .arr{ transition:transform .15s; }
-  .btn:hover .arr{ transform:translateX(3px); }
-
-  /* ====== SPEC SHEET (the product datasheet) ====================== */
-  section{ scroll-margin-top:78px; }
-  .sheet{
-    border-top:1px solid var(--ink);
-    border-bottom:1px solid var(--line);
-    padding:18px 0 26px;
-    margin-top:14px;
-  }
-  .sheet .row{
-    display:grid;
-    grid-template-columns:170px 1fr;
-    gap:8px 28px;
-    padding:11px 0;
-    border-top:1px solid var(--line);
-    align-items:baseline;
-  }
-  .sheet .row:first-child{ border-top:none; }
-  .sheet .row .k{ color:var(--muted); font-size:13px; letter-spacing:0.04em; }
-  .sheet .row .v{ font-size:16px; }
-  .sheet .row .v small{ color:var(--muted); }
-  @media (max-width:560px){
-    .sheet .row{ grid-template-columns:1fr; gap:2px; padding:13px 0; }
+  .row:hover{ padding-left:16px; }
+  .num{ font-family:var(--mono); font-size:13px; color:var(--accent); font-weight:600; }
+  .row h2{ font-size:clamp(19px,2.6vw,24px); font-weight:600; letter-spacing:-0.015em; margin:0 0 6px; }
+  .row p{ margin:0; color:var(--muted); font-size:15px; max-width:48ch; }
+  .row .arr{ font-size:20px; color:var(--faint); transition:color .16s, transform .16s; align-self:center; }
+  .row:hover .arr{ color:var(--accent); transform:translateX(4px); }
+  @media (max-width:520px){
+    .row{ grid-template-columns:34px 1fr; }
+    .row .arr{ display:none; }
   }
 
-  /* ====== SECTION HEADER ========================================== */
-  .shead{
-    display:flex; align-items:baseline; gap:16px;
-    padding-top:clamp(64px,10vw,108px);
-    margin-bottom:clamp(28px,4vw,46px);
-  }
-  .shead h2{ font-size:clamp(24px,3.4vw,34px); }
-  .shead .label{ padding-top:4px; }
-  .intro-line{ max-width:60ch; color:var(--muted); font-size:16px; margin:-18px 0 0; }
-
-  /* ====== TEN PRINCIPLES ========================================== */
-  .grid10{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .p{
-    background:var(--paper);
-    padding:clamp(24px,3vw,34px);
-  }
-  .p .n{
-    display:flex; align-items:center; gap:12px; margin-bottom:14px;
-  }
-  .p .n .idx{ font-size:13px; color:var(--accent); font-weight:600; }
-  .p .n .dash{ flex:1; height:1px; background:var(--line); }
-  .p h3{ font-size:19px; margin-bottom:9px; letter-spacing:-0.015em; }
-  .p p{ margin:0; color:var(--muted); font-size:15.5px; line-height:1.6; }
-  .p p b{ color:var(--ink); font-weight:600; }
-  @media (max-width:720px){ .grid10{ grid-template-columns:1fr; } }
-
-  /* ====== WORK ==================================================== */
-  .work .item{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    gap:6px 28px;
-    padding:26px 0;
-    border-top:1px solid var(--line);
-  }
-  .work .item:last-child{ border-bottom:1px solid var(--line); }
-  .work .yr{ font-family:var(--mono); font-size:13px; color:var(--faint); padding-top:5px; font-variant-numeric:tabular-nums; }
-  .work .role{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
-  .work .role h3{ font-size:22px; }
-  .work .role .tag{ font-size:12px; color:var(--muted); letter-spacing:0.04em; }
-  .work .desc{ color:var(--muted); font-size:16px; margin:8px 0 0; max-width:60ch; }
-  @media (max-width:560px){ .work .item{ grid-template-columns:1fr; } .work .yr{ padding-top:0; } }
-
-  /* ====== STATS =================================================== */
-  .stats{
-    display:grid; grid-template-columns:repeat(4,1fr);
-    gap:1px; background:var(--line); border:1px solid var(--line);
-    margin-top:clamp(30px,5vw,52px);
-  }
-  .stats div{ background:var(--paper); padding:24px clamp(16px,2vw,26px); }
-  .stats .big{ font-size:clamp(30px,4.4vw,46px); font-weight:600; letter-spacing:-0.03em; line-height:1; }
-  .stats .big .u{ color:var(--accent); }
-  .stats .cap{ margin-top:10px; }
-  @media (max-width:620px){ .stats{ grid-template-columns:repeat(2,1fr); } }
-
-  /* ====== CONTACT ================================================= */
-  .contact .body{
-    display:grid; grid-template-columns:1.1fr 1fr;
-    gap:clamp(24px,5vw,64px); align-items:start;
-  }
-  .contact p{ font-size:clamp(18px,2.2vw,22px); line-height:1.5; max-width:30ch; margin:0; }
-  .links{ border-top:1px solid var(--ink); }
-  .links a{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 2px; border-bottom:1px solid var(--line);
-    transition:padding .15s, color .15s;
-  }
-  .links a:hover{ padding-left:10px; color:var(--accent); }
-  .links a .lhs{ display:flex; align-items:baseline; gap:14px; }
-  .links a .ltag{ font-family:var(--mono); font-size:12px; color:var(--faint); }
-  .links a .lname{ font-size:18px; font-weight:500; }
-  .links a .arr{ color:var(--faint); }
-  .links a:hover .arr{ color:var(--accent); }
-  @media (max-width:680px){ .contact .body{ grid-template-columns:1fr; } }
-
-  /* ====== FOOTER ================================================== */
-  footer{
-    margin-top:clamp(72px,11vw,128px);
-    border-top:1px solid var(--ink);
-    padding:34px 0 60px;
-  }
-  footer .wrap{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; }
-  .maxim{ font-size:15px; }
-  .maxim b{ font-weight:600; }
-  .maxim small{ color:var(--muted); }
-  footer .meta{ text-align:right; color:var(--faint); font-size:13px; line-height:1.7; }
-  @media (max-width:560px){ footer .meta{ text-align:left; } }
+  footer{ padding:clamp(40px,8vw,72px) 0 48px; }
+  footer .maxim{ font-size:14px; }
+  footer .maxim b{ font-weight:600; }
+  footer .maxim small{ color:var(--muted); }
 </style>
 </head>
-
 <body>
 
-<!-- ============================ MASTHEAD ============================ -->
-<header class="mast">
+<header>
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Mike McCune, home">
+    <div class="brand">
       <span class="mark">MM</span>
-      <span>mccune.io</span>
-    </a>
-    <nav class="nav">
-      <a class="work-link" href="#work">Work</a>
-      <a class="about-link" href="#principles">Principles</a>
-      <a href="#contact">Contact</a>
-      <span class="now"><span class="dot"></span>Coalesce</span>
-    </nav>
+      <span class="label">mccune.io · index</span>
+    </div>
+    <h1>Two pages.</h1>
+    <p class="intro">A small directory. Pick one.</p>
   </div>
 </header>
 
-<main id="top">
+<main>
+  <div class="wrap">
+    <nav class="list">
 
-  <!-- ============================ HERO ============================ -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="kicker">
-        <span class="label">Engineering Leadership</span>
-        <span class="label" style="color:var(--faint)">Portland, OR · 45.5°N</span>
-      </div>
+      <a class="row" href="homepage/">
+        <span class="num">01</span>
+        <span>
+          <h2>Mike McCune — Engineering Leader</h2>
+          <p>The homepage. Two decades scaling engineering, told through Dieter Rams' ten principles.</p>
+        </span>
+        <span class="arr">→</span>
+      </a>
 
-      <h1>I build the system around the team — then <em>get out of its way.</em></h1>
+      <a class="row" href="voxel-world/">
+        <span class="num">02</span>
+        <span>
+          <h2>Voxel Earth</h2>
+          <p>A biome-tiled cartoon planet rendered in Three.js, with an image picker and sliders.</p>
+        </span>
+        <span class="arr">→</span>
+      </a>
 
-      <p class="lede">
-        Two decades scaling product engineering — <b>Red Hat, Logixboard, now Coalesce.</b>
-        I build remote-first teams that move fast, hold the line on quality, and stay
-        aligned with product, design, and GTM.
-      </p>
-
-      <div class="cta">
-        <a class="btn btn-solid" href="#work">See the work <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="https://calendly.com/mccun934/30min" target="_blank" rel="noopener">Book a slot</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================= SPEC SHEET ========================== -->
-  <section class="wrap" aria-label="Summary">
-    <div class="sheet">
-      <div class="row"><div class="k">Function</div>          <div class="v">Engineering leader — builds and scales product engineering organizations.</div></div>
-      <div class="row"><div class="k">Currently</div>         <div class="v">Leading a fully-remote, AI-forward global org at <b>Coalesce.io</b> <small>— the data transformation platform.</small></div></div>
-      <div class="row"><div class="k">Operating since</div>   <div class="v">2004 <small>· principal engineer → director → VP</small></div></div>
-      <div class="row"><div class="k">Based</div>             <div class="v">Portland, Oregon <small>· remote-first, 45.5°N 122.7°W</small></div></div>
-      <div class="row"><div class="k">Principle</div>         <div class="v">Less, but better. The system around the team should be as well-designed as the product.</div></div>
-    </div>
-  </section>
-
-  <!-- ===================== TEN PRINCIPLES ======================== -->
-  <section id="principles" class="wrap">
-    <div class="shead">
-      <span class="label idx">01—10</span>
-      <h2>Ten principles, applied to the&nbsp;work.</h2>
-    </div>
-    <p class="intro-line">Dieter Rams wrote ten principles for good design. They describe how I try to lead just as well as how Braun built a radio. The product here is the team.</p>
-
-    <div class="grid10" style="margin-top:clamp(28px,4vw,44px)">
-
-      <article class="p">
-        <div class="n"><span class="idx">01</span><span class="dash"></span></div>
-        <h3>Is innovative</h3>
-        <p>The work is never finished. New tools and ideas — <b>AI now most of all</b> — keep opening better ways to build. I adopt them when they serve the team and the product, never for novelty's own sake.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">02</span><span class="dash"></span></div>
-        <h3>Is useful</h3>
-        <p>A team exists to ship. It has to satisfy more than a roadmap — it has to work for the people on it and the customers it serves. <b>I remove anything that gets in the way of that.</b></p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">03</span><span class="dash"></span></div>
-        <h3>Is aesthetic</h3>
-        <p>How an org is built is part of whether it works. The systems people touch every day — <b>clarity, trust, tools, ritual</b> — shape their well-being and their output. Only well-made ones endure.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">04</span><span class="dash"></span></div>
-        <h3>Is understandable</h3>
-        <p>Good structure explains itself. The strategy, the priorities, and each person's part in them should be <b>legible without a meeting to decode them.</b> At best, the work is self-evident.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">05</span><span class="dash"></span></div>
-        <h3>Is unobtrusive</h3>
-        <p>A leader is a tool, not the point. My job is to build the system around the team and then <b>get out of its way</b> — leaving room for people to do their best work.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">06</span><span class="dash"></span></div>
-        <h3>Is honest</h3>
-        <p>No inflated metrics, no manufactured urgency. I won't make the work look more finished or more certain than it is. <b>I'd rather commit to less and deliver it.</b></p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">07</span><span class="dash"></span></div>
-        <h3>Is long-lasting</h3>
-        <p>I build for durability, not for the quarter. <b>Teams that scale themselves out of the critical path</b> outlast any trend, reorg, or hero — and never appear antiquated.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">08</span><span class="dash"></span></div>
-        <h3>Is thorough to the last detail</h3>
-        <p>Nothing arbitrary. <b>Observability, on-call, and incident hygiene</b> — the unglamorous parts — treated as first-class work. The care shows where no one is looking. That is respect.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">09</span><span class="dash"></span></div>
-        <h3>Is environmentally friendly</h3>
-        <p>Conserve what's scarce: people's time, attention, and trust. I cut waste — meetings, busywork, <b>infra cost (−50% in one org)</b> — so energy goes where it actually matters.</p>
-      </article>
-
-      <article class="p">
-        <div class="n"><span class="idx">10</span><span class="dash"></span></div>
-        <h3>Is as little design as possible</h3>
-        <p>Less, but better. Ruthless prioritization, tight feedback loops, <b>one observable bet at a time.</b> Strip away everything inessential until only what ships is left.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ========================= WORK ============================== -->
-  <section id="work" class="wrap work">
-    <div class="shead">
-      <span class="label idx">02</span>
-      <h2>Selected work.</h2>
-    </div>
-    <p class="intro-line">A short tour of the engineering organizations I've helped build — and the outcomes the teams produced once the system around them stopped getting in the way.</p>
-
-    <div style="margin-top:clamp(28px,4vw,44px)">
-      <div class="item">
-        <div class="yr">2024 — now</div>
-        <div>
-          <div class="role"><h3>Coalesce.io</h3><span class="tag">VP of Engineering</span></div>
-          <p class="desc">Leading an AI-forward, fully-remote global engineering organization building and supporting Coalesce's core data transformation platform — AI features, platform scale, and developer ergonomics in tight coordination with product and design.</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="yr">2022 — 2023</div>
-        <div>
-          <div class="role"><h3>Logixboard</h3><span class="tag">Sr. Director of Engineering</span></div>
-          <p class="desc">Scaled a 45-person globally distributed team. Drove platform observability and feature delivery that produced 75% revenue growth, a 50% infrastructure cost reduction, and SOC 2.</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="yr">2004 — 2022</div>
-        <div>
-          <div class="role"><h3>Red Hat</h3><span class="tag">Principal Engineer → Director</span></div>
-          <p class="desc">Eighteen years from principal engineer to director. Built and led the team behind a top-5 revenue product line with consistent 35% year-over-year growth.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- distilled stats -->
-    <div class="stats">
-      <div><div class="big">20<span class="u">+</span></div><div class="label cap">Years scaling eng</div></div>
-      <div><div class="big">45</div><div class="label cap">Engineers led</div></div>
-      <div><div class="big">75<span class="u">%</span></div><div class="label cap">Revenue growth</div></div>
-      <div><div class="big">IC<span class="u">→</span>VP</div><div class="label cap">Built the ladder</div></div>
-    </div>
-  </section>
-
-  <!-- ======================== CONTACT ============================ -->
-  <section id="contact" class="wrap contact">
-    <div class="shead">
-      <span class="label idx">03</span>
-      <h2>Contact.</h2>
-    </div>
-
-    <div class="body">
-      <p>Hiring, advising, or just want a sharp second opinion? I read every note.</p>
-
-      <div class="links">
-        <a href="https://calendly.com/mccun934/30min" target="_blank" rel="noopener">
-          <span class="lhs"><span class="ltag">01</span><span class="lname">Calendar</span></span>
-          <span class="arr">↗</span>
-        </a>
-        <a href="mailto:mike@mccune.io">
-          <span class="lhs"><span class="ltag">02</span><span class="lname">mike@mccune.io</span></span>
-          <span class="arr">→</span>
-        </a>
-        <a href="https://www.linkedin.com/in/mccun934/" target="_blank" rel="noopener">
-          <span class="lhs"><span class="ltag">03</span><span class="lname">LinkedIn</span></span>
-          <span class="arr">↗</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
+    </nav>
+  </div>
 </main>
 
-<!-- ========================== FOOTER ============================= -->
 <footer>
   <div class="wrap">
     <div class="maxim"><b>Weniger, aber besser.</b> &nbsp;<small>Less, but better.</small></div>
-    <div class="meta">
-      Mike McCune · Portland, OR<br />
-      Designed in the spirit of Dieter Rams · <span id="yr"></span>
-    </div>
   </div>
 </footer>
-
-<script>
-  // The only script: the year. Everything else is HTML and CSS, on purpose.
-  document.getElementById('yr').textContent = new Date().getFullYear();
-</script>
 
 </body>
 </html>
